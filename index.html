@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VynAura - Smart Glasses | AI Meets Reality | Augmented Vision Technology</title>
+    <meta name="description" content="Experience the future with VynAura smart glasses. Real-time translation, voice-to-text, SOS alerts, and AI-powered augmented reality.">
+    <meta name="keywords" content="smart glasses, AI glasses, augmented reality, VynAura, voice-to-text, real-time translation">
+    <meta name="author" content="VynAura">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="light">
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">VynAura</div>
+            <div class="loading-spinner"></div>
+            <p>Loading immersive experience...</p>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">VynAura</a>
+            
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#specs">Specifications</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#download">Download</a></li>
+                <li><a href="login.html" class="login-btn">Sign In</a></li>
+            </ul>
+            
+            <div class="nav-right">
+                <button class="theme-toggle" aria-label="Toggle theme">
+                    <input type="checkbox" name="checkbox" class="switch">
+                </button>
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="user-status" id="userStatus" style="display: none;">
+            <span id="userName"></span>
+            <button onclick="logout()" class="logout-btn">Logout</button>
+        </div>
+    </nav>
+
+    <div class="nav-overlay"></div>
+<!-- Hero Section with Interactive Text -->
+<section class="hero" id="home">
+    <div class="hero-3d-container">
+        <div class="model-loading" id="modelLoading">
+            <div class="loading-spinner"></div>
+            <p>Loading VynAura Glasses...</p>
+        </div>
+        
+        <model-viewer 
+            src="./rayban-glasses.glb"
+            alt="VynAura Smart Glasses 3D model"
+            auto-rotate
+            camera-controls
+            ar
+             camera-orbit="0deg 75deg 2.5m"
+            field-of-view="30deg"
+            min-camera-orbit="auto auto 2m"
+            max-camera-orbit="auto auto 3m"
+            camera-target="0m 0m 0m"
+            interaction-prompt="none"
+            class="glasses-model centered-model"
+            id="glassesModel">
+        </model-viewer>
+        
+        <!-- Interactive Text Overlay -->
+        <div class="ai-reality-overlay">
+            <div class="tagline-container">
+                <div class="tagline-text">
+                    <span class="ai-text" data-text="AI">AI</span>
+                    <span class="meets-text">meets</span>
+                    <span class="reality-text" data-text="Reality">Reality</span>
+                </div>
+                
+            </div>
+            
+           
+        </div>
+    </div>
+</section>
+<!-- Features Gallery Section -->
+<section class="features-gallery" id="features">
+    <div class="container">
+        <div class="section-title">
+            <h2>Smart Features</h2>
+            <p>Discover how VynAura enhances your daily life</p>
+        </div>
+        
+        <div class="features-slider-container">
+            <div class="slider-nav">
+                <button class="slider-arrow prev-arrow">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="slider-arrow next-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <div class="features-track">
+                <!-- Slide 1 -->
+                <div class="feature-slide active">
+                    <div class="progress-bar"></div>
+                    <div class="feature-image">
+                        <img src="./image4.png" alt="Voice to Text Feature" />
+                    </div>
+                    <div class="feature-content">
+                        <h3>Voice-to-Text</h3>
+                        <p>Convert speech to text in real-time, displaying conversations directly in your field of vision. Perfect for meetings, lectures, or conversations in noisy environments.</p>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="feature-slide">
+                    <div class="progress-bar"></div>
+                    <div class="feature-image">
+                        <img src="./image5.png" alt="SOS Emergency Feature" />
+                    </div>
+                    <div class="feature-content">
+                        <h3>SOS Emergency Alert</h3>
+                        <p>Instantly send your location and alert emergency contacts with a simple voice command or gesture. Your safety is our priority.</p>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="feature-slide">
+                    <div class="progress-bar"></div>
+                    <div class="feature-image">
+                        <img src="./image6.png" alt="Live Translation Feature" />
+                    </div>
+                    <div class="feature-content">
+                        <h3>Live Translation</h3>
+                        <p>Break language barriers with real-time translation of conversations displayed directly in your view. Support for 40+ languages.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slider-progress">
+            <span class="progress-dot active" data-slide="0"></span>
+            <span class="progress-dot" data-slide="1"></span>
+            <span class="progress-dot" data-slide="2"></span>
+        </div>
+    </div>
+</section>
+
+    <!-- Specifications Section -->
+    <section class="specifications" id="specs">
+        <div class="container">
+            <div class="section-title">
+                <h2>Technical Specifications</h2>
+                <p>Premium hardware meets intelligent software</p>
+            </div>
+            <div class="specs-grid">
+                <div class="spec-category">
+                    <h3>Display & Optics</h3>
+                    <ul>
+                        <li>Micro OLED Display</li>
+                        <li>1080p Resolution per eye</li>
+                        <li>60Hz Refresh Rate</li>
+                        <li>Adaptive Brightness</li>
+                    </ul>
+                </div>
+                <div class="spec-category">
+                    <h3>Audio & Input</h3>
+                    <ul>
+                        <li>Bone Conduction Speakers</li>
+                        <li>Dual Beamforming Mics</li>
+                        <li>Touch-sensitive Temple</li>
+                        <li>Voice Command Support</li>
+                    </ul>
+                </div>
+                <div class="spec-category">
+                    <h3>Performance</h3>
+                    <ul>
+                        <li>Custom AI Processor</li>
+                        <li>8GB RAM + 128GB Storage</li>
+                        <li>All-day Battery Life</li>
+                        <li>5G & Wi-Fi 6 Support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section with Form -->
+    <section class="reviews" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>User Reviews</h2>
+                <p>See what our users say about VynAura</p>
+            </div>
+            
+            <div class="reviews-content">
+                <div class="reviews-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"These glasses changed how I communicate during business trips. The real-time translation is flawless!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <strong>Sarah Chen</strong>
+                            <span>Business Consultant</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"As someone with hearing challenges, the voice-to-text feature has been life-changing."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <strong>Michael Torres</strong>
+                            <span>Software Engineer</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"The SOS feature gives me peace of mind during my late-night walks home from work."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <strong>Jessica Park</strong>
+                            <span>University Student</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Review Form -->
+                <div class="add-review">
+                    <h3>Share Your Experience</h3>
+                    <form class="review-form" id="reviewForm">
+                        <div class="form-group">
+                            <input type="text" id="reviewName" name="name" required>
+                            <label for="reviewName">Your Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="reviewTitle" name="title" required>
+                            <label for="reviewTitle">Your Profession</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="reviewMessage" name="message" rows="4" required placeholder="Share your experience with VynAura..."></textarea>
+                        </div>
+                        <div class="rating">
+                            <span>Rating:</span>
+                            <div class="stars">
+                                <i class="far fa-star" data-rating="1"></i>
+                                <i class="far fa-star" data-rating="2"></i>
+                                <i class="far fa-star" data-rating="3"></i>
+                                <i class="far fa-star" data-rating="4"></i>
+                                <i class="far fa-star" data-rating="5"></i>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Review</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download" id="download">
+        <div class="container">
+            <div class="download-content">
+                <div class="section-title">
+                    <h2>Download VynAura App</h2>
+                    <p>Connect your smart glasses with our mobile application</p>
+                </div>
+                <div class="download-buttons">
+                    <a href="#" class="download-btn">
+                        <div class="download-icon">
+                            <i class="fab fa-apple"></i>
+                        </div>
+                        <div class="download-text">
+                            <span>Download on the</span>
+                            <p>App Store</p>
+                        </div>
+                    </a>
+                    <a href="#" class="download-btn">
+                        <div class="download-icon">
+                            <i class="fab fa-google-play"></i>
+                        </div>
+                        <div class="download-text">
+                            <span>Get it on</span>
+                            <p>Google Play</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>VynAura</h3>
+                    <p>Smart Glasses – AI Meets Reality</p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>support@vynaura.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#specs">Specifications</a></li>
+                        <li><a href="#download">Download</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">User Guides</a></li>
+                        <li><a href="#">Warranty</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>University Project</h4>
+                    <ul>
+                        <li><a href="#">About the Project</a></li>
+                        <li><a href="#">Research Paper</a></li>
+                        <li><a href="#">Team Members</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 VynAura - University Graduation Project. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

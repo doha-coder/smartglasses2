@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In - VynAura</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+    /* نضيف الـ Login styles هنا */
+    .login-page {
+        min-height: 100vh;
+        background: var(--bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .login-container {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .login-card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+    }
+
+    .login-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .login-logo {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 10px;
+    }
+
+    .login-subtitle {
+        opacity: 0.7;
+        font-size: 1.1rem;
+    }
+
+    /* بقية الـ styles نفس اللي فوق بس معدلة */
+    .login-form .input-group {
+        position: relative;
+        margin-bottom: 25px;
+    }
+
+    .login-form .input-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--accent);
+    }
+
+    .login-form input {
+        width: 100%;
+        padding: 15px 15px 15px 50px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        color: var(--text);
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .login-form input:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px rgba(0, 217, 255, 0.1);
+    }
+
+    .password-toggle {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--text);
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+    .form-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        font-size: 0.9rem;
+    }
+
+    .remember-me {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .forgot-password {
+        color: var(--accent);
+        text-decoration: none;
+    }
+
+    .login-btn {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-bottom: 25px;
+    }
+
+    .login-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(74, 108, 247, 0.3);
+    }
+
+    .login-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .login-footer {
+        text-align: center;
+        opacity: 0.7;
+        font-size: 0.9rem;
+    }
+
+    .signup-link {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    /* Loading spinner */
+    .spinner {
+        width: 20px;
+        height: 20px;
+        border: 2px solid transparent;
+        border-top: 2px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        display: none;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Success message */
+    .success-message {
+        background: rgba(0, 255, 0, 0.1);
+        border: 1px solid rgba(0, 255, 0, 0.3);
+        color: #00ff00;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        display: none;
+    }
+</style>
+</head>
+<body data-theme="light">
+
+
+
+<!-- محتوى صفحة Login -->
+<section class="login-page">
+  <div class="login-container">
+    <div class="login-card">
+      
+      <!-- رسالة نجاح -->
+      <div class="success-message" id="successMessage">
+        <i class="fas fa-check-circle"></i>
+        Verification email sent! Please check your inbox.
+      </div>
+
+      <div class="login-header">
+  <a href="index.html" style="text-decoration: none;">
+    <div class="login-logo">VynAura</div>
+  </a>
+  <p class="login-subtitle">Sign in to your account</p>
+</div>
+
+      <form class="login-form" id="loginForm">
+        <div class="input-group">
+          <div class="input-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <input type="email" id="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="input-group">
+          <div class="input-icon">
+            <i class="fas fa-lock"></i>
+          </div>
+          <input type="password" id="password" placeholder="Enter your password" required>
+          <button type="button" class="password-toggle" id="passwordToggle">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+
+        <div class="form-options">
+          <label class="remember-me">
+            <input type="checkbox" id="rememberMe">
+            <span>Remember me</span>
+          </label>
+          <a href="#forgot" class="forgot-password">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="login-btn" id="submitBtn">
+          <span>Sign In</span>
+          <div class="spinner" id="spinner"></div>
+        </button>
+      </form>
+
+      <div class="login-footer">
+        <p>Don't have an account? <a href="signup.html" class="signup-link">Sign up</a></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const loginForm = document.getElementById('loginForm');
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
+  const passwordToggle = document.getElementById('passwordToggle');
+  const rememberMe = document.getElementById('rememberMe');
+  const submitBtn = document.getElementById('submitBtn');
+  const spinner = document.getElementById('spinner');
+  const successMessage = document.getElementById('successMessage');
+
+  // Show/hide password
+  passwordToggle.addEventListener('click', function() {
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+  });
+
+  // LOGIN Form submission - FIXED VERSION
+  loginForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    // Show loading
+    submitBtn.disabled = true;
+    spinner.style.display = 'inline-block';
+    submitBtn.querySelector('span').textContent = 'Signing In...';
+
+    try {
+      console.log('📨 Sending login data to backend...');
+      
+      // Send data to backend LOGIN endpoint
+      const response = await fetch('http://localhost:5000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: emailInput.value,
+          password: passwordInput.value
+        })
+      });
+
+      const data = await response.json();
+      console.log('📨 Backend response:', data);
+
+      if (data.success) {
+        // Success - show success message
+         localStorage.setItem('vynaura_user', JSON.stringify(data.user));
+        successMessage.style.display = 'block';
+        successMessage.innerHTML = '<i class="fas fa-check-circle"></i> Login successful! Redirecting...';
+        spinner.style.display = 'none';
+        submitBtn.querySelector('span').textContent = 'Login Successful!';
+        
+        console.log('✅ Login successful!');
+        
+       setTimeout(() => {
+  window.location.href = 'index.html';
+}, 2000);
+      } else {
+        // Error from backend
+        alert('Login failed: ' + data.message);
+        spinner.style.display = 'none';
+        submitBtn.disabled = false;
+        submitBtn.querySelector('span').textContent = 'Sign In';
+      }
+
+    } catch (error) {
+      console.error('❌ Login error:', error);
+      alert('Network error. Please try again.');
+      spinner.style.display = 'none';
+      submitBtn.disabled = false;
+      submitBtn.querySelector('span').textContent = 'Sign In';
+    }
+  });
+
+  // Load saved credentials
+  const savedEmail = localStorage.getItem('vynaura_remember_email');
+  const savedPassword = localStorage.getItem('vynaura_remember_password');
+  
+  if (savedEmail && savedPassword) {
+    emailInput.value = savedEmail;
+    passwordInput.value = savedPassword;
+    rememberMe.checked = true;
+  }
+
+  // Save credentials if remember me is checked
+  rememberMe.addEventListener('change', function() {
+    if (this.checked) {
+      localStorage.setItem('vynaura_remember_email', emailInput.value);
+      localStorage.setItem('vynaura_remember_password', passwordInput.value);
+    } else {
+      localStorage.removeItem('vynaura_remember_email');
+      localStorage.removeItem('vynaura_remember_password');
+    }
+  });
+});
+</script>
+</body>
+</html>
